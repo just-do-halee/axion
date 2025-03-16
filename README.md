@@ -42,10 +42,10 @@ When working with React or Vue, import from the appropriate submodule:
 
 ```javascript
 // For React applications
-import { useAxion, useAxionEffect, useAtom } from 'axion-state/react';
+import { useAxion, useAxionEffect, useAtom } from "axion-state/react";
 
 // For Vue applications
-import { useAxion, useAxionComputed, useAxionModel } from 'axion-state/vue';
+import { useAxion, useAxionComputed, useAxionModel } from "axion-state/vue";
 ```
 
 ## Basic Usage
@@ -189,30 +189,30 @@ timeAPI.goto(snapshots[0].id); // Jump to first snapshot
 Axion is built from the ground up with TypeScript and provides excellent type safety:
 
 ```typescript
-import axion from 'axion-state';
+import axion from "axion-state";
 
 // Create a typed state
 interface UserState {
   name: string;
   age: number;
   preferences: {
-    theme: 'light' | 'dark';
+    theme: "light" | "dark";
     notifications: boolean;
   };
 }
 
 // TypeScript will infer all types correctly
 const user = axion<UserState>({
-  name: 'John',
+  name: "John",
   age: 30,
   preferences: {
-    theme: 'light',
-    notifications: true
-  }
+    theme: "light",
+    notifications: true,
+  },
 });
 
 // Type-safe path access
-const theme = user.at('preferences').at('theme').get();  // type: 'light' | 'dark'
+const theme = user.at("preferences").at("theme").get(); // type: 'light' | 'dark'
 ```
 
 ## Contributing
@@ -223,6 +223,8 @@ const theme = user.at('preferences').at('theme').get();  // type: 'light' | 'dar
 4. Submit a pull request with detailed changes.
 
 See the full [Contribution Guide](CONTRIBUTING.md) for details.
+
+Korean version here [한국어 가이드](CONTRIBUTING-KO.md).
 
 ## License
 

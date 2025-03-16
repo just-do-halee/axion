@@ -1,76 +1,76 @@
-# Axion Developer Manual
+# Axion 개발자 매뉴얼
 
-1. [Introduction](#1-introduction)
-2. [Theoretical Foundation](#2-theoretical-foundation)
-3. [Architecture Overview](#3-architecture-overview)
-4. [Core Modules](#4-core-modules)
-5. [API Reference](#5-api-reference)
-6. [Advanced Concepts](#6-advanced-concepts)
-7. [Extension Guide](#7-extension-guide)
-8. [Contribution Guidelines](#8-contribution-guidelines)
-9. [Performance Optimization](#9-performance-optimization)
-10. [Examples and Patterns](#10-examples-and-patterns)
+1. [소개](#1-소개)
+2. [이론적 기반](#2-이론적-기반)
+3. [아키텍처 개요](#3-아키텍처-개요)
+4. [핵심 모듈](#4-핵심-모듈)
+5. [API 참조](#5-api-참조)
+6. [고급 개념](#6-고급-개념)
+7. [확장 가이드](#7-확장-가이드)
+8. [기여 가이드](#8-기여-가이드)
+9. [성능 최적화](#9-성능-최적화)
+10. [예제 및 패턴](#10-예제-및-패턴)
 
 ---
 
-## 1. Introduction
+## 1. 소개
 
-### 1.1 What is Axion?
+### 1.1 Axion란?
 
-Axion is a modern state management library designed based on mathematically proven principles. It provides a simple, predictable, and high-performance solution for complex state management. The library is designed around these core values:
+Axion은 수학적으로 증명된 원리를 기반으로 설계된 현대적 상태 관리 라이브러리입니다. 복잡한 상태 관리를 단순화하고, 예측 가능하며, 성능이 뛰어난 솔루션을 제공합니다. 이 라이브러리는 다음과 같은 핵심 가치를 중심으로 설계되었습니다:
 
-- **Mathematical Rigor**: All features based on formal proofs
-- **Performance Optimization**: Incremental computation and minimal updates
-- **Developer Experience**: Intuitive API and strong type safety
-- **Extensibility**: Lean core with a plugin architecture
+- **수학적 엄밀성**: 모든 기능이 형식적 증명에 기반
+- **성능 최적화**: 증분 계산과 최소 업데이트
+- **개발자 경험**: 직관적 API와 강력한 타입 안전성
+- **확장성**: 간결한 코어와 플러그인 아키텍처
 
-### 1.2 Key Features
+### 1.2 핵심 특징
 
-- **Single Source of Truth**: Predictable state management
-- **Automatic Dependency Tracking**: Declarative derived state
-- **Path-Based Access**: Efficient updates to deeply nested objects
-- **Transactions**: Atomic state changes
-- **Time Travel**: Built-in undo/redo capability
-- **Type Safety**: Full TypeScript support
-- **Framework Agnostic**: Works with React, Vue, or vanilla JS
+- **단일 원천 진실**: 예측 가능한 상태 관리
+- **자동 의존성 추적**: 선언적 파생 상태
+- **경로 기반 접근**: 깊게 중첩된 객체의 효율적 업데이트
+- **트랜잭션**: 원자적 상태 변경
+- **시간 여행**: 내장된 실행 취소/다시 실행 기능
+- **타입 안전성**: 완전한 TypeScript 지원
+- **프레임워크 독립적**: React, Vue 또는 바닐라 JS에서 사용 가능
 
-### 1.3 Design Principles
+### 1.3 디자인 원칙
 
-1. **Simplicity**: Eliminate unnecessary complexity
-2. **Consistency**: Predictable API patterns
-3. **Separation of Concerns**: Clear boundaries between concerns
-4. **Immutability**: All state changes are immutable
-5. **Zero-Overhead Abstraction**: Convenient API without performance penalties
+1. **단순성**: 불필요한 복잡성 제거
+2. **일관성**: 예측 가능한 API 패턴
+3. **분리의 원칙**: 명확한 관심사 분리
+4. **불변성**: 모든 상태 변경은 불변적(immutable)
+5. **제로 오버헤드 추상화**: 성능 저하 없는 편리한 API
 
-### 1.4 Axion vs Other Libraries
+### 1.4 Axion vs 다른 라이브러리
 
-| Feature             | Axion           | Redux       | MobX          | Zustand   | Jotai/Recoil |
-| ------------------- | --------------- | ----------- | ------------- | --------- | ------------ |
-| **Core Paradigm**   | DILC Math Model | Flux        | Observability | Flux+Hooks | Atomic State |
-| **State Access**    | Path-based      | Selectors   | Proxies       | Selectors | Selectors    |
-| **Change Detection**| Precise Paths   | Shallow Eq  | Proxies       | Shallow Eq | Atom Deps    |
-| **Immutability**    | Required        | Required    | Optional      | Required  | Required     |
-| **Derived State**   | Auto Deps       | Manual      | Automatic     | Manual    | Automatic    |
-| **TypeScript**      | Advanced Inference | Basic    | Basic         | Moderate  | Moderate     |
-| **Bundle Size**     | ~8KB            | ~16KB       | ~22KB         | ~3KB      | ~7KB         |
-| **Optimization**    | Path-based Diff | Selector Memo | Granular Obs | Selectors | Atom-level   |
+| 특징              | Axion            | Redux       | MobX          | Zustand   | Jotai/Recoil |
+| ----------------- | ---------------- | ----------- | ------------- | --------- | ------------ |
+| **기반 패러다임** | DILC 수학 모델   | Flux        | 관찰 가능성   | Flux + 훅 | 원자적 상태  |
+| **상태 접근**     | 경로 기반        | 선택자      | 프록시        | 선택자    | 선택자       |
+| **변경 감지**     | 정밀한 경로 추적 | 얕은 비교   | 프록시        | 얕은 비교 | 원자 의존성  |
+| **불변성**        | 필수             | 필수        | 선택적        | 필수      | 필수         |
+| **파생 상태**     | 자동 의존성      | 수동        | 자동          | 수동      | 자동         |
+| **TypeScript**    | 고급 유형 추론   | 기본        | 기본          | 중급      | 중급         |
+| **번들 크기**     | 약 8KB           | ~16KB       | ~22KB         | ~3KB      | ~7KB         |
+| **최적화**        | 경로 기반 차등   | 선택자 메모 | 세분화된 관찰 | 선택자    | 원자 차원    |
 
-## 2. Theoretical Foundation
+## 2. 이론적 기반
 
-### 2.1 DILC Model Introduction
+### 2.1 DILC 모델 소개
 
-DILC (Directed Incremental Lattice Category) is the core theoretical foundation of Axion. This mathematical model integrates the following mathematical fields to formalize state management:
+DILC(Directed Incremental Lattice Category)는 Axion의 핵심 이론적 기반입니다. 이 수학적 모델은 상태 관리를 형식화하기 위해 다음 수학 분야를 통합합니다:
 
-- **Category Theory**: State transformations and composition
-- **Lattice Theory**: Structuring state relationships and dependencies
-- **Incremental Computation Theory**: Efficient recalculation
-- **Directed Graph Theory**: Modeling dependency flow
+- **카테고리 이론**: 상태 변환 및 합성
+- **격자 이론**: 상태 관계 및 의존성 구조화
+- **증분 계산 이론**: 효율적인 재계산
+- **방향 그래프 이론**: 의존성 흐름 모델링
 
-### 2.2 Mathematical Theory
+### 2.2 수학적 이론
 
-#### 2.2.1 Merkle Tree State Model
+#### 2.2.1 머클 트리 상태 모델
 
-Axion models state as a hash-based Merkle tree. Each node has a hash value, allowing for change detection and efficient comparison.
+Axion는 상태를 해시 기반 머클 트리로 모델링합니다. 각 노드는 해시 값을 가지며, 이를 통해 변경 감지와 효율적인 비교가 가능합니다.
 
 ```
        hash(root)
@@ -80,427 +80,428 @@ Axion models state as a hash-based Merkle tree. Each node has a hash value, allo
 h(A1)  h(A2)  h(B1)  h(B2)
 ```
 
-#### 2.2.2 Categorical Lenses
+#### 2.2.2 카테고리적 렌즈
 
-Axion uses an algebraic structure called 'lenses' to access and update parts of state:
+Axion는 상태의 일부에 접근하고 업데이트하기 위해 '렌즈'라는 대수적 구조를 사용합니다:
 
 ```
 Lens<S, A> = (get: S → A, set: S × A → S)
 ```
 
-Lenses satisfy the following laws:
+렌즈는 다음 법칙을 만족합니다:
 
 - GetSet: `get(set(s, a)) = a`
 - SetGet: `set(s, get(s)) = s`
 - SetSet: `set(set(s, a), b) = set(s, b)`
 
-#### 2.2.3 Dependency Graph
+#### 2.2.3 의존성 그래프
 
-Axion models dependencies between states as a directed acyclic graph (DAG), and the dependency space as a complete lattice.
+Axion는 상태 간의 의존성을 유향 비순환 그래프(DAG)로, 의존성 공간을 완전 격자(complete lattice)로 모델링합니다.
 
 ```
 G = (V, E)
-- V: Set of state references
-- E: Set of dependency relationships (directed)
+- V: 상태 참조 집합
+- E: 의존성 관계 집합 (방향성 있음)
 ```
 
-#### 2.2.4 Incremental Delta Computation
+#### 2.2.4 증분 델타 계산
 
-State changes are represented as minimal delta sets:
+상태 변화는 최소 델타 세트로 표현됩니다:
 
 ```
 Δ(s, s') = { (p, v') | p ∈ paths(s), v' = s'[p] ≠ s[p] }
 ```
 
-- `Δ(s, s)` = ∅ (no delta with itself)
-- `Δ(s1, s3)` ⊆ `Δ(s1, s2)` ∪ `Δ(s2, s3)` (delta triangle inequality)
+- `Δ(s, s)` = ∅ (자기 자신과의 델타는 없음)
+- `Δ(s1, s3)` ⊆ `Δ(s1, s2)` ∪ `Δ(s2, s3)` (델타 삼각 부등식)
 
-### 2.3 Practical Implications
+### 2.3 실용적 의미
 
-What this mathematical foundation means in practice:
+이러한 수학적 기반이 실제로 의미하는 바:
 
-1. **Provable Consistency**: Guaranteed integrity of state updates
-2. **Optimal Performance**: Only performs exactly the necessary computations
-3. **Debuggability**: Clear tracking of state changes
-4. **Maintainability**: Easy-to-reason-about code
+1. **증명 가능한 일관성**: 상태 업데이트의
+   무결성 보장
+2. **최적 성능**: 정확히 필요한 계산만 수행
+3. **디버깅 용이성**: 상태 변화의 명확한 추적
+4. **유지보수성**: 추론하기 쉬운 코드
 
-## 3. Architecture Overview
+## 3. 아키텍처 개요
 
-### 3.1 System Components
+### 3.1 시스템 구성 요소
 
-Axion consists of the following core components:
+Axion는 다음 핵심 구성 요소로 이루어져 있습니다:
 
 ```
 ┌───────────────────────────────────────────────────────────┐
-│                     User Interface Layer                   │
+│                     사용자 인터페이스 계층                    │
 └───────────┬───────────────────────────────┬───────────────┘
             │                               │
 ┌───────────▼───────────┐       ┌───────────▼───────────┐
-│       API Layer        │◄─────►│    Integration Layer  │
+│       API 계층         │◄─────►│       통합 계층        │
 └───────────┬───────────┘       └───────────┬───────────┘
             │                               │
 ┌───────────▼───────────────────────────────▼───────────┐
-│                     DILC Core Framework                │
+│                     DILC 코어 프레임워크                 │
 ├─────────────┬─────────────┬─────────────┬─────────────┤
-│  State Engine│Incremental Engine│Transform Engine│Dependency Engine│
+│  상태 엔진   │  증분 엔진  │  변환 엔진  │ 의존성 엔진 │
 └─────────────┴─────────────┴─────────────┴─────────────┘
 ```
 
-1. **DILC Core Framework**: Mathematical foundation of state management
-2. **API Layer**: Developer interface
-3. **Integration Layer**: Framework-specific bindings
-4. **User Interface Layer**: Views and rendering
+1. **DILC 코어 프레임워크**: 상태 관리의 수학적 기반
+2. **API 계층**: 개발자 인터페이스
+3. **통합 계층**: 프레임워크별 바인딩
+4. **사용자 인터페이스 계층**: 뷰 및 렌더링
 
-### 3.2 Data Flow
+### 3.2 데이터 흐름
 
-Axion's data flow is unidirectional:
+Axion의 데이터 흐름은 단방향입니다:
 
 ```
 ┌────────┐    ┌────────┐    ┌────────┐    ┌────────┐
-│ State  │───►│Transform│───►│New State│───►│Subscribers│
+│ 상태   │───►│ 변환   │───►│ 새 상태 │───►│ 구독자  │
 └────────┘    └────────┘    └────────┘    └────────┘
                                 │
                                 ▼
                            ┌────────┐
-                           │Recompute│
-                           │(if needed)│
+                           │재계산   │
+                           │(필요시) │
                            └────────┘
 ```
 
-1. State transformation is applied
-2. Changed paths are tracked
-3. Affected derived states are recomputed
-4. Subscribers are notified
+1. 상태 변환이 적용됨
+2. 변경된 경로 추적
+3. 영향받는 파생 상태 재계산
+4. 구독자에게 알림
 
-### 3.3 Core Abstractions
+### 3.3 핵심 추상화
 
 ```
 ┌─────────────┐
-│  Atom<T>    │ - Basic unit of state
+│  Atom<T>    │ - 상태의 기본 단위
 └──────┬──────┘
        │
 ┌──────▼──────┐
-│PathOperator<T>│ - Path access operator
+│PathOperator<T>│ - 경로 접근 연산자
 └──────┬──────┘
        │
 ┌──────▼──────┐
-│ Transform<T> │ - State transformation algebra
+│ Transform<T> │ - 상태 변환 대수
 └──────┬──────┘
        │
 ┌──────▼──────┐
-│ Derived<T>  │ - Derived state
+│ Derived<T>  │ - 파생 상태
 └─────────────┘
 ```
 
-## 4. Core Modules
+## 4. 핵심 모듈
 
-### 4.1 State Module (`core/`)
+### 4.1 상태 모듈 (`core/`)
 
-The state module is the center of Axion, containing:
+상태 모듈은 Axion의 중심이며, 다음 구성 요소를 포함합니다:
 
-#### 4.1.1 `atom.ts`
+#### 4.1.1 `state.ts`
 
-Implements state atoms and the basic state API.
+상태 아톰과 기본 상태 API를 구현합니다.
 
-**Responsibilities**:
+**책임**:
 
-- State creation and management
-- Subscription management
-- Ensuring immutability
+- 상태 생성 및 관리
+- 구독 관리
+- 불변성 보장
 
-**Key Classes/Functions**:
+**주요 클래스/함수**:
 
-- `createAtom<T>`: Creates a state atom
-- `Atom<T>` interface: State manipulation API
+- `createAtom<T>`: 상태 아톰 생성
+- `Atom<T>` 인터페이스: 상태 조작 API
 
 #### 4.1.2 `stateNode.ts`
 
-Implements the internal structure of state.
+상태의 내부 구조를 구현합니다.
 
-**Responsibilities**:
+**책임**:
 
-- Hash-based immutable state storage
-- Change detection and delta computation
-- Path-based access and updates
+- 해시 기반 불변 상태 저장
+- 변경 감지 및 델타 계산
+- 경로 기반 접근 및 업데이트
 
-**Key Classes/Functions**:
+**주요 클래스/함수**:
 
-- `StateNode<T>`: Internal state structure
-- `update`, `getPath`, `setPath`: Core state operations
+- `StateNode<T>`: 내부 상태 구조
+- `update`, `getPath`, `setPath`: 핵심 상태 연산
 
 #### 4.1.3 `path.ts`
 
-Implements path-based state access.
+경로 기반 상태 접근을 구현합니다.
 
-**Responsibilities**:
+**책임**:
 
-- Type-safe access to specific parts of state
-- Path operators
+- 상태의 특정 부분에 대한 타입 안전한 접근
+- 경로 연산자 제공
 
-**Key Classes/Functions**:
+**주요 클래스/함수**:
 
-- `PathNode<T, P>`: Type-safe path accessor
-- `at`, `get`, `set`, `update`: Path manipulation
+- `PathNode<T, P>`: 타입 안전한 경로 접근자
+- `at`, `get`, `set`, `update`: 경로 조작
 
-### 4.2 Dependency Tracking Module (`internals/`)
+### 4.2 의존성 추적 모듈 (`internals/`)
 
 #### 4.2.1 `dependency.ts`
 
-Implements the dependency tracking system.
+의존성 추적 시스템을 구현합니다.
 
-**Responsibilities**:
+**책임**:
 
-- Automatic dependency tracking
-- Cycle detection and prevention
-- Dependency graph maintenance
+- 의존성 자동 추적
+- 순환 의존성 감지 및 방지
+- 의존성 그래프 유지
 
-**Key Classes/Functions**:
+**주요 클래스/함수**:
 
-- `DependencyTracker`: Dependency collector
-- `startTracking`, `stopTracking`: Tracking control
-- `detectCycle`: Cycle detection
+- `DependencyTracker`: 의존성 수집기
+- `startTracking`, `stopTracking`: 추적 제어
+- `detectCycle`: 순환 의존성 감지
 
 #### 4.2.2 `memo.ts`
 
-Implements the memoization system.
+메모이제이션 시스템을 구현합니다.
 
-**Responsibilities**:
+**책임**:
 
-- Caching computation results
-- Managing cache invalidation
-- Performance optimization
+- 계산 결과 캐싱
+- 캐시 무효화 관리
+- 성능 최적화
 
-**Key Classes/Functions**:
+**주요 클래스/함수**:
 
-- `createMemoized`: Creates memoized functions
-- `createKeyedMemoized`: Key-based memoization
-- `createScopedMemoized`: Scope-based memoization
+- `createMemoized`: 메모이제이션 함수 생성
+- `createKeyedMemoized`: 키 기반 메모이제이션
+- `createScopedMemoized`: 스코프 기반 메모이제이션
 
 #### 4.2.3 `batch.ts`
 
-Implements batch processing of state updates.
+상태 업데이트 배치 처리를 구현합니다.
 
-**Responsibilities**:
+**책임**:
 
-- Grouping multiple updates as a single change
-- Preventing unnecessary re-renders
+- 여러 업데이트를 단일 변경으로 그룹화
+- 불필요한 리렌더링 방지
 
-**Key Classes/Functions**:
+**주요 클래스/함수**:
 
-- `executeBatch`: Executes function within a batch
-- `isBatching`: Checks current batch state
-- `scheduleBatchedEffect`: Schedules effects
+- `executeBatch`: 배치 내에서 함수 실행
+- `isBatching`: 현재 배치 상태 확인
+- `scheduleBatchedEffect`: 효과 예약
 
-### 4.3 Derived State Module (`core/`)
+### 4.3 파생 상태 모듈 (`core/`)
 
 #### 4.3.1 `derive.ts`
 
-Implements the derived state system.
+파생 상태 시스템을 구현합니다.
 
-**Responsibilities**:
+**책임**:
 
-- Automatic dependency tracking-based derived state
-- Incremental recomputation
-- Optimized subscriptions
+- 자동 의존성 추적 기반 파생 상태
+- 증분 재계산
+- 최적화된 구독
 
-**Key Classes/Functions**:
+**주요 클래스/함수**:
 
-- `createDerived`: Creates derived state
-- Internal dependency tracking and recomputation logic
+- `createDerived`: 파생 상태 생성
+- 내부 의존성 추적 및 재계산 로직
 
-### 4.4 Effect Module (`core/`)
+### 4.4 효과 모듈 (`core/`)
 
 #### 4.4.1 `effect.ts`
 
-Implements the reactive effects system.
+반응형 효과 시스템을 구현합니다.
 
-**Responsibilities**:
+**책임**:
 
-- Side effects reacting to state changes
-- Cleanup function management
-- Effect activation/deactivation
+- 상태 변경에 반응하는 사이드 이펙트
+- 정리 함수 관리
+- 효과 활성화/비활성화
 
-**Key Classes/Functions**:
+**주요 클래스/함수**:
 
-- `createEffect`: Creates an effect
-- Internal effect tracking and execution logic
+- `createEffect`: 효과 생성
+- 내부 효과 추적 및 실행 로직
 
-### 4.5 Time Module (`time/`)
+### 4.5 시간 모듈 (`time/`)
 
 #### 4.5.1 `history.ts`
 
-Implements time travel functionality.
+시간 여행 기능을 구현합니다.
 
-**Responsibilities**:
+**책임**:
 
-- State history management
-- Undo/redo support
+- 상태 이력 관리
+- 실행 취소/다시 실행 지원
 
-**Key Classes/Functions**:
+**주요 클래스/함수**:
 
-- `TimeManager`: History manager
-- `getTimeAPI`: Provides time API
+- `TimeManager`: 이력 관리자
+- `getTimeAPI`: 시간 API 제공
 
 #### 4.5.2 `snapshot.ts`
 
-Manages state snapshots.
+상태 스냅샷을 관리합니다.
 
-**Responsibilities**:
+**책임**:
 
-- State snapshot creation and comparison
-- Snapshot serialization/deserialization
-- Snapshot compression
+- 상태 스냅샷 생성 및 비교
+- 스냅샷 직렬화/역직렬화
+- 스냅샷 압축
 
-**Key Classes/Functions**:
+**주요 클래스/함수**:
 
-- `createSnapshot`: Creates snapshot
-- `compressSnapshots`: Optimizes snapshots
+- `createSnapshot`: 스냅샷 생성
+- `compressSnapshots`: 스냅샷 최적화
 
-### 4.6 Utility Module (`utils/`)
+### 4.6 유틸리티 모듈 (`utils/`)
 
 #### 4.6.1 `types.ts`
 
-Provides type definitions.
+타입 정의를 제공합니다.
 
-**Responsibilities**:
+**책임**:
 
-- Type definitions for type safety
-- Type utilities
+- 타입 안전성을 위한 타입 정의
+- 타입 유틸리티 제공
 
-**Key Types**:
+**주요 타입**:
 
-- `DeepReadonly<T>`: Deep readonly type
-- `Path`, `PathValue`: Path-related types
-- Other utility types
+- `DeepReadonly<T>`: 깊은 읽기 전용 타입
+- `Path`, `PathValue`: 경로 관련 타입
+- 기타 유틸리티 타입
 
 #### 4.6.2 `hash.ts`
 
-Implements hashing functionality.
+해싱 기능을 구현합니다.
 
-**Responsibilities**:
+**책임**:
 
-- Value hashing
-- Hash computation for Merkle tree
+- 값 해싱
+- 머클 트리를 위한 해시 계산
 
-**Key Functions**:
+**주요 함수**:
 
-- `computeHash`: Compute object hash
-- `hashPath`: Path hashing
+- `computeHash`: 객체 해시 계산
+- `hashPath`: 경로 해싱
 
 #### 4.6.3 `clone.ts`
 
-Implements object cloning and structural sharing.
+객체 복제 및 구조적 공유를 구현합니다.
 
-**Responsibilities**:
+**책임**:
 
-- Supporting immutable data structures
-- Optimized object copying
+- 불변 데이터 구조 지원
+- 최적화된 객체 복사
 
-**Key Functions**:
+**주요 함수**:
 
-- `structuralClone`: Clone with structural sharing
-- `deepFreeze`: Enforce object immutability
-- `setValueAtPath`: Set value at path
+- `structuralClone`: 구조적 공유를 활용한 복제
+- `deepFreeze`: 객체 불변성 강제
+- `setValueAtPath`: 경로에 값 설정
 
 #### 4.6.4 `path.ts`
 
-Implements path processing functionality.
+경로 처리 기능을 구현합니다.
 
-**Responsibilities**:
+**책임**:
 
-- Path string conversion
-- Path relationship operations
+- 경로 문자열 변환
+- 경로 관계 연산
 
-**Key Functions**:
+**주요 함수**:
 
-- `stringToPath`: Convert string to path
-- `pathToString`: Convert path to string
-- `areRelatedPaths`: Check path relationship
+- `stringToPath`: 문자열을 경로로 변환
+- `pathToString`: 경로를 문자열로 변환
+- `areRelatedPaths`: 경로 관계 확인
 
-## 5. API Reference
+## 5. API 참조
 
-### 5.1 Core API
+### 5.1 핵심 API
 
 #### 5.1.1 `axion<T>(initialState: T, options?: Options<T>): Atom<T>`
 
-Creates a state atom.
+상태 아톰을 생성합니다.
 
-**Parameters**:
+**파라미터**:
 
-- `initialState: T` - Initial state value
-- `options?: Options<T>` - Optional options
-  - `name?: string` - Name for debugging
-  - `equals?: (a: T, b: T) => boolean` - Value comparison function
-  - `devtools?: boolean` - Enable debugging tools
+- `initialState: T` - 초기 상태 값
+- `options?: Options<T>` - 선택적 옵션
+  - `name?: string` - 디버깅용 이름
+  - `equals?: (a: T, b: T) => boolean` - 값 비교 함수
+  - `devtools?: boolean` - 디버깅 도구 활성화
 
-**Returns**:
+**반환값**:
 
-- `Atom<T>` - State atom
+- `Atom<T>` - 상태 아톰
 
-**Example**:
+**예제**:
 
 ```typescript
-// Basic usage
+// 기본 사용법
 const counter = axion({ count: 0 });
 
-// With options
+// 옵션 사용
 const user = axion(
   { name: "John", age: 30 },
   { name: "userState", devtools: true }
 );
 ```
 
-#### 5.1.2 `Atom<T>` Interface
+#### 5.1.2 `Atom<T>` 인터페이스
 
-Interface for state atoms.
+상태 아톰의 인터페이스입니다.
 
-**Properties and Methods**:
+**속성 및 메서드**:
 
-- `get(): DeepReadonly<T>` - Get current state value
-- `set(newState: T): void` - Set new state
-- `update(updater: (state: DeepReadonly<T>) => T): void` - Update state with function
-- `at<K extends keyof T>(key: K): PathNode<T, [K]>` - Get path accessor
-- `subscribe(handler: () => void): () => void` - Subscribe to changes
-- `getPath(path: Path): unknown` - Internal, get value at path
-- `setPath(path: Path, value: unknown): void` - Internal, set value at path
+- `get(): DeepReadonly<T>` - 현재 상태 값 가져오기
+- `set(newState: T): void` - 새 상태로 설정
+- `update(updater: (state: DeepReadonly<T>) => T): void` - 함수로 상태 업데이트
+- `at<K extends keyof T>(key: K): PathNode<T, [K]>` - 경로 접근자 가져오기
+- `subscribe(handler: () => void): () => void` - 변경 구독
+- `getPath(path: Path): unknown` - 내부용, 경로로 값 가져오기
+- `setPath(path: Path, value: unknown): void` - 내부용, 경로에 값 설정
 
-**Example**:
+**예제**:
 
 ```typescript
-// Get state
+// 상태 가져오기
 const value = counter.get();
 
-// Set state
+// 상태 설정
 counter.set({ count: 5 });
 
-// Update with function
+// 함수로 업데이트
 counter.update((state) => ({ count: state.count + 1 }));
 
-// Use path accessor
+// 경로 접근자 사용
 const countPath = counter.at("count");
 
-// Subscribe to changes
+// 변경 구독
 const unsubscribe = counter.subscribe(() => {
   console.log("State changed:", counter.get());
 });
 
-// Unsubscribe
+// 구독 취소
 unsubscribe();
 ```
 
-#### 5.1.3 `PathNode<T, P>` Interface
+#### 5.1.3 `PathNode<T, P>` 인터페이스
 
-Interface for path accessors.
+경로 접근자 인터페이스입니다.
 
-**Methods**:
+**메서드**:
 
-- `get(): PathValue<T, P>` - Get value at path
-- `set(value: PathValue<T, P>): void` - Set value at path
-- `update(updater: (current: PathValue<T, P>) => PathValue<T, P>): void` - Update path value with function
-- `at<K extends keyof PathValue<T, P>>(key: K): PathNode<T, [...P, K]>` - Get child path accessor
-- `subscribe(handler: () => void): () => void` - Subscribe to specific path changes
+- `get(): PathValue<T, P>` - 경로의 값 가져오기
+- `set(value: PathValue<T, P>): void` - 경로의 값 설정
+- `update(updater: (current: PathValue<T, P>) => PathValue<T, P>): void` - 함수로 경로 값 업데이트
+- `at<K extends keyof PathValue<T, P>>(key: K): PathNode<T, [...P, K]>` - 하위 경로 접근자 가져오기
+- `subscribe(handler: () => void): () => void` - 특정 경로 변경 구독
 
-**Example**:
+**예제**:
 
 ```typescript
 const user = axion({
@@ -511,52 +512,52 @@ const user = axion({
   },
 });
 
-// Get value with path
+// 경로로 값 가져오기
 const name = user.at("name").get();
 
-// Set value at path
+// 경로에 값 설정
 user.at("name").set("Jane");
 
-// Access nested path
+// 중첩 경로 접근
 const age = user.at("profile").at("age").get();
 
-// Update path value with function
+// 함수로 경로 값 업데이트
 user
   .at("profile")
   .at("age")
   .update((age) => age + 1);
 
-// Subscribe to path changes
+// 경로 변경 구독
 const unsubscribe = user.at("name").subscribe(() => {
   console.log("Name changed:", user.at("name").get());
 });
 ```
 
-### 5.2 Derived State API
+### 5.2 파생 상태 API
 
 #### 5.2.1 `axion.derive<T>(compute: () => T, options?: { equals?: (a: T, b: T) => boolean, name?: string }): Atom<T>`
 
-Creates derived state.
+파생 상태를 생성합니다.
 
-**Parameters**:
+**파라미터**:
 
-- `compute: () => T` - Computation function
-- `options?: Object` - Optional options
-  - `equals?: (a: T, b: T) => boolean` - Value comparison function
-  - `name?: string` - Name for debugging
+- `compute: () => T` - 계산 함수
+- `options?: Object` - 선택적 옵션
+  - `equals?: (a: T, b: T) => boolean` - 값 비교 함수
+  - `name?: string` - 디버깅용 이름
 
-**Returns**:
+**반환값**:
 
-- `Atom<T>` - Derived state atom
+- `Atom<T>` - 파생 상태 아톰
 
-**Example**:
+**예제**:
 
 ```typescript
-// Basic derived state
+// 기본 파생 상태
 const counter = axion({ count: 0 });
 const doubled = axion.derive(() => counter.get().count * 2);
 
-// Complex derived state
+// 복합 파생 상태
 const formState = axion({
   firstName: "John",
   lastName: "Doe",
@@ -567,70 +568,70 @@ const fullName = axion.derive(() => {
   return `${state.firstName} ${state.lastName}`;
 });
 
-// Custom equals function
+// 커스텀 비교 함수
 const list = axion({ items: [1, 2, 3] });
 const itemArray = axion.derive(() => [...list.get().items], {
   equals: (a, b) => a.length === b.length && a.every((v, i) => v === b[i]),
 });
 ```
 
-### 5.3 Effect API
+### 5.3 효과 API
 
 #### 5.3.1 `axion.effect<T = void>(effectFn: (state: DeepReadonly<T>) => void | (() => void)): () => void`
 
-Creates a reactive effect.
+반응형 효과를 생성합니다.
 
-**Parameters**:
+**파라미터**:
 
-- `effectFn: (state: DeepReadonly<T>) => void | (() => void)` - Effect function (optionally returning cleanup function)
+- `effectFn: (state: DeepReadonly<T>) => void | (() => void)` - 효과 함수 (선택적으로 정리 함수 반환)
 
-**Returns**:
+**반환값**:
 
-- `() => void` - Effect cleanup function
+- `() => void` - 효과 정리 함수
 
-**Example**:
+**예제**:
 
 ```typescript
-// Basic effect
+// 기본 효과
 const counter = axion({ count: 0 });
 const cleanup = axion.effect(() => {
   console.log("Count:", counter.get().count);
 });
 
-// Effect with cleanup function
+// 정리 함수가 있는 효과
 const isOnline = axion({ value: true });
 const cleanup = axion.effect(() => {
   const online = isOnline.get().value;
   console.log(`Status: ${online ? "Online" : "Offline"}`);
 
-  // Return cleanup function
+  // 정리 함수 반환
   return () => {
     console.log("Cleaning up...");
   };
 });
 
-// Clean up effect
+// 효과 정리
 cleanup();
 ```
 
-### 5.4 Transaction API
+### 5.4 트랜잭션 API
 
 #### 5.4.1 `axion.tx<T>(callback: () => T): T`
 
-Executes an atomic transaction.
+원자적 트랜잭션을 실행합니다.
 
-**Parameters**:
+**파라미터**:
 
-- `callback: () => T` - Callback to execute within transaction
+- `callback: () => T` - 트랜잭션 내에서 실행할 콜백
 
-**Returns**:
+**반환값**:
 
-- `T` - Return value of callback
+- `T` - 콜백의 반환값
 
-**Example**:
+**예제**:
 
 ```typescript
-// Basic transaction
+// 기본 트랜잭션
 const user = axion({
   name: "John",
   email: "john@example.com",
@@ -643,7 +644,7 @@ axion.tx(() => {
   user.at("lastUpdated").set(new Date().toISOString());
 });
 
-// Nested transactions
+// 중첩 트랜잭션
 axion.tx(() => {
   user.at("name").set("Alice");
 
@@ -655,131 +656,131 @@ axion.tx(() => {
 });
 ```
 
-### 5.5 Time Travel API
+### 5.5 시간 여행 API
 
 #### 5.5.1 `axion.getTimeAPI<T>(atom: Atom<T>): TimeAPI<T>`
 
-Provides time travel API.
+시간 여행 API를 제공합니다.
 
-**Parameters**:
+**파라미터**:
 
-- `atom: Atom<T>` - Target atom
+- `atom: Atom<T>` - 대상 아톰
 
-**Returns**:
+**반환값**:
 
-- `TimeAPI<T>` - Time travel API
+- `TimeAPI<T>` - 시간 여행 API
 
-#### 5.5.2 `TimeAPI<T>` Interface
+#### 5.5.2 `TimeAPI<T>` 인터페이스
 
-Interface providing time travel functionality.
+시간 여행 기능을 제공하는 인터페이스입니다.
 
-**Methods**:
+**메서드**:
 
-- `undo(): boolean` - Undo change
-- `redo(): boolean` - Redo change
-- `goto(id: string): boolean` - Go to specific point
-- `getPast(): ReadonlyArray<StateSnapshot<T>>` - Get past snapshots
-- `getFuture(): ReadonlyArray<StateSnapshot<T>>` - Get future snapshots
-- `clear(): void` - Clear history
-- `setLimit(limit: number): void` - Set history limit
+- `undo(): boolean` - 변경 실행 취소
+- `redo(): boolean` - 변경 다시 실행
+- `goto(id: string): boolean` - 특정 시점으로 이동
+- `getPast(): ReadonlyArray<StateSnapshot<T>>` - 과거 스냅샷 가져오기
+- `getFuture(): ReadonlyArray<StateSnapshot<T>>` - 미래 스냅샷 가져오기
+- `clear(): void` - 이력 지우기
+- `setLimit(limit: number): void` - 이력 제한 설정
 
-**Example**:
+**예제**:
 
 ```typescript
-// Get time travel API
+// 시간 여행 API 가져오기
 const counter = axion({ count: 0 });
 const timeAPI = axion.getTimeAPI(counter);
 
-// Make state changes
+// 상태 변경
 counter.at("count").set(1);
 counter.at("count").set(2);
 counter.at("count").set(3);
 
-// Undo
+// 실행 취소
 timeAPI.undo(); // count = 2
 timeAPI.undo(); // count = 1
 
-// Redo
+// 다시 실행
 timeAPI.redo(); // count = 2
 
-// Get past snapshots
+// 과거 스냅샷 가져오기
 const snapshots = timeAPI.getPast();
 
-// Go to specific point
+// 특정 시점으로 이동
 timeAPI.goto(snapshots[0].id);
 
-// Set history limit
+// 이력 제한 설정
 timeAPI.setLimit(10);
 
-// Clear history
+// 이력 지우기
 timeAPI.clear();
 ```
 
-### 5.6 Debugging API
+### 5.6 디버깅 API
 
 #### 5.6.1 `axion.devtools`
 
-Provides debugging tools.
+디버깅 도구를 제공합니다.
 
-**Methods**:
+**메서드**:
 
-- `createDevtools(options?: DevtoolsOptions): Devtools` - Create debugging tools instance
-- `getDevtools(): Devtools | null` - Get current debugging tools instance
-- `registerWithDevtools<T>(atom: Atom<T>, name: string): Atom<T>` - Register atom with debugging tools
+- `createDevtools(options?: DevtoolsOptions): Devtools` - 디버깅 도구 인스턴스 생성
+- `getDevtools(): Devtools | null` - 현재 디버깅 도구 인스턴스 가져오기
+- `registerWithDevtools<T>(atom: Atom<T>, name: string): Atom<T>` - 아톰을 디버깅 도구에 등록
 
-**Example**:
+**예제**:
 
 ```typescript
-// Initialize debugging tools
+// 디버깅 도구 초기화
 const devtools = axion.devtools({
   name: "MyApp",
   maxEvents: 100,
   logToConsole: true,
 });
 
-// Register atom
+// 아톰 등록
 const counter = axion({ count: 0 });
 axion.registerWithDevtools(counter, "counter");
 
-// Subscribe to events
+// 이벤트 구독
 devtools.subscribe((event) => {
   console.log("Devtools event:", event);
 });
 
-// Get current state snapshot
+// 현재 상태 스냅샷 가져오기
 const snapshot = devtools.getStateSnapshot();
 ```
 
-### 5.7 Error Handling API
+### 5.7 오류 처리 API
 
 #### 5.7.1 `axion.setErrorHandler`
 
-Sets global error handler.
+글로벌 오류 핸들러를 설정합니다.
 
-**Parameters**:
+**파라미터**:
 
-- `handler: (error: AxionError) => void` - Error handler
+- `handler: (error: AxionError) => void` - 오류 핸들러
 
-**Example**:
+**예제**:
 
 ```typescript
-// Set global error handler
+// 글로벌 오류 핸들러 설정
 axion.setErrorHandler((error) => {
   console.error(`[${error.code}] ${error.message}`);
 
-  // Report error to analytics service
+  // 분석 서비스에 오류 보고
   analyticsService.reportError(error);
 });
 ```
 
-### 5.8 Framework Integration API
+### 5.8 프레임워크 통합 API
 
 #### 5.8.1 React
 
 ```typescript
 import { useAxion } from "axion-state/react";
 
-// Use atom
+// 아톰 사용
 function Counter() {
   const counter = axion({ count: 0 });
   const [state, setState] = useAxion(counter);
@@ -794,7 +795,7 @@ function Counter() {
   );
 }
 
-// Use path accessor
+// 경로 접근자 사용
 function UserProfile() {
   const user = axion({
     name: "John",
@@ -818,18 +819,18 @@ function UserProfile() {
 ```typescript
 import { useAxion, useAxionComputed } from "axion-state/vue";
 
-// Use in Vue Composition API
+// Vue Composition API에서 사용
 export default {
   setup() {
     const counter = axion({ count: 0 });
 
-    // Reactive state
+    // 반응형 상태
     const state = useAxion(counter);
 
-    // Computed property
+    // 계산된 속성
     const doubled = useAxionComputed(() => state.value.count * 2);
 
-    // Methods
+    // 메서드
     const increment = () => {
       counter.update((s) => ({ count: s.count + 1 }));
     };
@@ -843,41 +844,41 @@ export default {
 };
 ```
 
-## 6. Advanced Concepts
+## 6. 고급 개념
 
-### 6.1 Cyclic Dependency Detection
+### 6.1 순환 의존성 탐지
 
-Axion automatically detects and prevents cyclic dependencies between derived states and effects.
+Axion는 파생 상태와 효과 사이의 순환 의존성을 자동으로 감지하고 방지합니다.
 
-#### How It Works
+#### 작동 방식
 
-1. **Computation Stack Tracking**: Add current atom ID to stack when derived computation starts
-2. **Dependency Check**: Check if already in stack when adding dependency
-3. **Cycle Detection**: Cyclic dependency error if same atom ID found
+1. **계산 스택 추적**: 파생 계산이 시작될 때 현재 아톰 ID를 스택에 추가
+2. **의존성 확인**: 의존성 추가 시 스택에 이미 있는지 확인
+3. **사이클 감지**: 동일한 아톰 ID가 발견되면 순환 의존성 오류 발생
 
 ```typescript
-// Cyclic dependency example
+// 순환 의존성 예시
 const a = axion({ value: 1 });
 const b = axion.derive(() => a.get().value * 2);
 
-// Cyclic dependency - will throw error!
+// 순환 의존성 - 오류 발생!
 const c = axion.derive(() => {
   const valueB = b.get();
-  a.set({ value: valueB + 1 }); // a depends on b, which depends on a
+  a.set({ value: valueB + 1 }); // a가 b에 의존하고, b는 a에 의존
   return valueB + 3;
 });
 ```
 
-### 6.2 Memoization Strategies
+### 6.2 메모이제이션 전략
 
-Axion uses multiple levels of memoization to optimize performance.
+Axion는 여러 수준의 메모이제이션을 사용하여 성능을 최적화합니다.
 
-#### 6.2.1 Single Cache Memoization
+#### 6.2.1 단일 캐시 메모이제이션
 
-Optimized memoization strategy for the most common case.
+가장 흔한 경우를 위한 최적화된 메모이제이션 전략입니다.
 
 ```typescript
-// Internal implementation
+// 내부 구현
 function memoize<T>(fn: () => T): () => T {
   let cache: T | undefined;
   let isInitialized = false;
@@ -892,35 +893,35 @@ function memoize<T>(fn: () => T): () => T {
 }
 ```
 
-#### 6.2.2 LRU Cache Memoization
+#### 6.2.2 LRU 캐시 메모이제이션
 
-Caches results for multiple input values.
+여러 입력 값에 대한 결과를 캐싱합니다.
 
 ```typescript
-// Internal implementation
+// 내부 구현
 function memoizeWithLRU<K, V>(fn: (key: K) => V, maxSize = 10): (key: K) => V {
   const cache = new Map<string, { key: K; value: V }>();
   const keyOrder: K[] = [];
 
   return (key: K) => {
-    // Cache check and management logic
+    // 캐시 확인 및 관리 로직
     // ...
   };
 }
 ```
 
-### 6.3 Transaction Nesting
+### 6.3 트랜잭션 중첩
 
-Axion naturally supports nested transactions.
+Axion는 중첩된 트랜잭션을 자연스럽게 지원합니다.
 
-#### How It Works
+#### 작동 방식
 
-1. Depth counter increments when transaction starts
-2. Nested transactions only increment counter
-3. Changes applied and notifications sent only when last transaction completes
+1. 트랜잭션이 시작되면 깊이 카운터 증가
+2. 중첩된 트랜잭션은 카운터만 증가시킴
+3. 마지막 트랜잭션이 완료될 때만 변경 사항 적용 및 알림
 
 ```typescript
-// Internal implementation
+// 내부 구현
 let batchDepth = 0;
 
 function executeBatch<T>(callback: () => T): T {
@@ -936,18 +937,18 @@ function executeBatch<T>(callback: () => T): T {
 }
 ```
 
-### 6.4 Delta Compression
+### 6.4 델타 압축
 
-Delta compression strategy to optimize changes.
+변경 사항을 최적화하기 위한 델타 압축 전략입니다.
 
-#### How It Works
+#### 작동 방식
 
-1. Collect all changed paths
-2. Remove child paths if parent path exists
-3. Calculate minimal delta set
+1. 변경된 모든 경로 수집
+2. 상위 경로가 있으면 하위 경로 제거
+3. 최소한의 델타 집합 계산
 
 ```typescript
-// Internal implementation
+// 내부 구현
 function optimizePaths(paths: Path[]): Path[] {
   const result = new Set<Path>();
 
@@ -972,27 +973,27 @@ function optimizePaths(paths: Path[]): Path[] {
 }
 ```
 
-### 6.5 Time Complexity Analysis
+### 6.5 시간 복잡도 분석
 
-Time complexity for key operations:
+주요 연산의 시간 복잡도:
 
-| Operation            | Complexity | Description           |
-| -------------------- | ---------- | --------------------- |
-| `atom.get()`         | O(1)       | Constant time access  |
-| `atom.set(value)`    | O(n)       | n is state size       |
-| `pathNode.get()`     | O(log d)   | d is path depth       |
-| `pathNode.set(value)`| O(log d)   | Proportional to path depth |
-| Derived computation  | O(c)       | c is computation complexity |
-| Delta computation    | O(Δ)       | Δ is change size      |
-| Change detection     | O(log n)   | Hash-based detection  |
-| Dependency tracking  | O(k)       | k is dependency count |
+| 연산                  | 복잡도   | 설명             |
+| --------------------- | -------- | ---------------- |
+| `atom.get()`          | O(1)     | 상수 시간 접근   |
+| `atom.set(value)`     | O(n)     | n은 상태 크기    |
+| `pathNode.get()`      | O(log d) | d는 경로 깊이    |
+| `pathNode.set(value)` | O(log d) | 경로 깊이에 비례 |
+| 파생 계산             | O(c)     | c는 계산 복잡도  |
+| 델타 계산             | O(Δ)     | Δ는 변경 크기    |
+| 변경 감지             | O(log n) | 해시 기반 감지   |
+| 의존성 추적           | O(k)     | k는 의존성 수    |
 
-### 6.6 Custom Equals Functions
+### 6.6 커스텀 비교 함수
 
-For special equality comparisons:
+특별한 동등성 비교가 필요한 경우:
 
 ```typescript
-// Deep comparison for arrays
+// 배열에 대한 깊은 비교
 const list = axion(
   { items: [1, 2, 3] },
   {
@@ -1010,7 +1011,7 @@ const list = axion(
   }
 );
 
-// Also applicable to derived state
+// 파생 상태에도 적용 가능
 const filteredItems = axion.derive(
   () => list.get().items.filter((x) => x % 2 === 0),
   {
@@ -1019,59 +1020,59 @@ const filteredItems = axion.derive(
 );
 ```
 
-## 7. Extension Guide
+## 7. 확장 가이드
 
-### 7.1 Custom Atom Implementation
+### 7.1 커스텀 아톰 구현
 
-You can extend Axion core to implement atoms for special requirements.
+Axion 코어를 확장하여 특별한 요구 사항에 맞는 아톰을 구현할 수 있습니다.
 
 ```typescript
 import { createAtom, Atom } from "axion-state";
 
-// localStorage-backed atom
+// 로컬 스토리지 지원 아톰
 function createPersistentAtom<T>(key: string, initialState: T): Atom<T> {
-  // Load initial state from localStorage
+  // 로컬 스토리지에서 초기 상태 로드
   const savedState = localStorage.getItem(key);
   const state = savedState ? JSON.parse(savedState) : initialState;
 
-  // Create base atom
+  // 기본 아톰 생성
   const atom = createAtom(state);
 
-  // Store original set function
+  // 원래 get/set 함수 저장
   const originalSet = atom.set;
 
-  // Override set function
+  // set 함수 오버라이드
   atom.set = function (newState: T): void {
-    // Call original implementation
+    // 기본 구현 호출
     originalSet.call(atom, newState);
 
-    // Save to localStorage
+    // 로컬 스토리지에 저장
     localStorage.setItem(key, JSON.stringify(newState));
   };
 
   return atom;
 }
 
-// Usage
+// 사용 예
 const persistentCounter = createPersistentAtom("counter", { count: 0 });
 ```
 
-### 7.2 Middleware Implementation
+### 7.2 미들웨어 구현
 
-You can implement middleware to customize Axion behavior.
+Axion의 동작을 커스터마이즈하는 미들웨어를 구현할 수 있습니다.
 
 ```typescript
 import { createAtom, Atom } from "axion-state";
 
-// Logging middleware
+// 로깅 미들웨어
 function withLogging<T>(name: string): (atom: Atom<T>) => Atom<T> {
   return (atom) => {
-    // Store original methods
+    // 원래 메서드 저장
     const originalGet = atom.get;
     const originalSet = atom.set;
     const originalUpdate = atom.update;
 
-    // Override methods
+    // 메서드 오버라이드
     atom.get = function () {
       const result = originalGet.call(atom);
       console.log(`[${name}] Get:`, result);
@@ -1092,31 +1093,31 @@ function withLogging<T>(name: string): (atom: Atom<T>) => Atom<T> {
   };
 }
 
-// Usage
+// 사용 예
 const counter = withLogging("counter")(createAtom({ count: 0 }));
 ```
 
-### 7.3 Custom Transformers
+### 7.3 커스텀 변환자
 
-You can implement transformers for special state transformations.
+특별한 상태 변환을 위한 변환자를 구현할 수 있습니다.
 
 ```typescript
 import { createTransformer, Transformer } from "axion-state/core";
 
-// Immutable update function type
+// 불변 업데이트 함수 타입
 type Updater<T> = (state: T) => T;
 
-// Immer-style transformer
+// Immer 스타일 변환자
 function createImmerTransformer<T>(
   producer: (draft: T) => void
 ): Transformer<T> {
   return createTransformer(
-    ["*"], // Affects all paths
+    ["*"], // 모든 경로에 영향
     (state) => {
-      // Use immer library
+      // immer 라이브러리 사용
       const [nextState, patches] = produce(state, producer, true);
 
-      // Extract changed paths
+      // 변경된 경로 추출
       const paths = patches.map((patch) =>
         patch.path.split("/").filter(Boolean)
       );
@@ -1126,22 +1127,22 @@ function createImmerTransformer<T>(
   );
 }
 
-// Usage
+// 사용 예
 const updateUser = createImmerTransformer((draft) => {
   draft.name = "Jane";
   draft.profile.age += 1;
 });
 
-// Apply
+// 적용
 store.apply(updateUser);
 ```
 
-### 7.4 Plugin Development
+### 7.4 플러그인 개발
 
-You can develop plugins to extend the Axion ecosystem.
+Axion 생태계를 확장하는 플러그인을 개발할 수 있습니다.
 
 ```typescript
-// State persistence plugin
+// 상태 영속성 플러그인
 export function persistPlugin<T>(
   key: string,
   options: {
@@ -1157,9 +1158,9 @@ export function persistPlugin<T>(
   } = options;
 
   return {
-    // Extend atom
+    // 아톰 확장
     extendAtom(atom: Atom<T>): Atom<T> {
-      // Load initial data from localStorage
+      // 로컬 스토리지에서 초기 데이터 로드
       const savedData = storage.getItem(key);
       if (savedData) {
         try {
@@ -1170,7 +1171,7 @@ export function persistPlugin<T>(
         }
       }
 
-      // Subscribe to changes and save
+      // 변경 사항 구독 및 저장
       atom.subscribe(() => {
         try {
           const serialized = serialize(atom.get());
@@ -1183,7 +1184,7 @@ export function persistPlugin<T>(
       return atom;
     },
 
-    // Add methods
+    // 메서드 추가
     methods: {
       clearPersistedState() {
         storage.removeItem(key);
@@ -1197,53 +1198,53 @@ export function persistPlugin<T>(
   };
 }
 
-// Usage
+// 사용 예
 const persist = persistPlugin("counter");
 const counter = persist.extendAtom(axion({ count: 0 }));
 
-// Use methods added by plugin
+// 플러그인이 추가한 메서드 사용
 persist.methods.clearPersistedState();
 ```
 
-## 8. Contribution Guidelines
+## 8. 기여 가이드
 
-### 8.1 Development Environment Setup
+### 8.1 개발 환경 설정
 
 ```bash
-# Clone repository
+# 저장소 복제
 git clone https://github.com/axion-state/axion.git
 cd axion
 
-# Install dependencies
+# 의존성 설치
 npm install
 
-# Start development server
+# 개발 서버 시작
 npm run dev
 
-# Run tests
+# 테스트 실행
 npm test
 
-# Build
+# 빌드
 npm run build
 ```
 
-### 8.2 Code Style
+### 8.2 코드 스타일
 
-Axion adheres to the following coding standards:
+Axion는 다음 코딩 표준을 준수합니다:
 
-- TypeScript type safety
-- Functional programming principles
-- Immutability first
-- Clear naming
-- Thorough documentation
+- TypeScript 타입 안전성
+- 함수형 프로그래밍 원칙
+- 불변성 우선
+- 명확한 네이밍
+- 철저한 문서화
 
 ```typescript
 /**
- * Gets value at specific path.
+ * 특정 경로의 값을 가져옵니다.
  *
- * @param obj - Source object
- * @param path - Path to access
- * @returns Value at path, or undefined if path doesn't exist
+ * @param obj - 소스 객체
+ * @param path - 접근할 경로
+ * @returns 경로에 있는 값, 또는 경로가 존재하지 않으면 undefined
  *
  * @example
  * getValueAtPath({ a: { b: 1 } }, ['a', 'b']) // 1
@@ -1270,16 +1271,16 @@ export function getValueAtPath<T>(
 }
 ```
 
-### 8.3 Testing Guidelines
+### 8.3 테스트 가이드
 
-All features should include the following tests:
+모든 기능에는 다음 테스트가 포함되어야 합니다:
 
-1. **Unit Tests**: Verify individual functions and modules
-2. **Integration Tests**: Verify interaction between multiple modules
-3. **Performance Tests**: Verify time and memory usage
+1. **단위 테스트**: 개별 함수 및 모듈 검증
+2. **통합 테스트**: 여러 모듈 간 상호 작용 검증
+3. **성능 테스트**: 시간 및 메모리 사용량 확인
 
 ```typescript
-// Unit test example
+// 단위 테스트 예시
 describe("getValueAtPath", () => {
   test("empty path returns the object itself", () => {
     const obj = { a: 1 };
@@ -1316,27 +1317,27 @@ describe("getValueAtPath", () => {
 });
 ```
 
-### 8.4 Documentation Standards
+### 8.4 문서화 표준
 
-Code documentation should include:
+코드 문서화에는 다음이 포함되어야 합니다:
 
-1. Purpose of function or class
-2. Parameter and return value descriptions
-3. Exceptions and edge cases
-4. Usage examples
-5. References to related functions or modules
+1. 함수 또는 클래스의 목적
+2. 매개변수 및 반환 값 설명
+3. 예외 및 에지 케이스
+4. 사용 예시
+5. 관련 함수 또는 모듈에 대한 참조
 
 ```typescript
 /**
- * Executes multiple state changes as a single transaction.
+ * 여러 상태 변경을 단일 트랜잭션으로 실행합니다.
  *
- * All changes within the transaction are notified to subscribers
- * as a single update only after the transaction completes. Transactions can be nested,
- * and notifications are sent only when the top-level transaction completes.
+ * 트랜잭션 내의 모든 변경 사항은 트랜잭션이 완료된 후에만
+ * 구독자에게 단일 업데이트로 알림됩니다. 트랜잭션은 중첩될 수 있으며,
+ * 최상위 트랜잭션이 완료될 때만 알림이 전송됩니다.
  *
- * @typeParam T - Type of callback return value
- * @param callback - Function to execute within transaction
- * @returns Return value of callback
+ * @typeParam T - 콜백 반환 값의 타입
+ * @param callback - 트랜잭션 내에서 실행할 함수
+ * @returns 콜백의 반환 값
  *
  * @example
  * axion.tx(() => {
@@ -1344,34 +1345,34 @@ Code documentation should include:
  *   user.at('email').set('jane@example.com');
  * });
  *
- * @see {@link isBatching} Check current transaction state
- * @see {@link executeBatch} Internal batch processing implementation
+ * @see {@link isBatching} 현재 트랜잭션 상태 확인
+ * @see {@link executeBatch} 내부 배치 처리 구현
  */
 export function transaction<T>(callback: () => T): T {
   return executeBatch(callback);
 }
 ```
 
-### 8.5 Pull Request Process
+### 8.5 풀 리퀘스트 프로세스
 
-1. **Create Issue**: Create an issue before starting work
-2. **Create Branch**: Create branch for feature or bugfix
-3. **Write Code**: Write code following coding standards
-4. **Write Tests**: Write tests for new code
-5. **Pull Request**: Submit PR with description and review request
-6. **Code Review**: Incorporate feedback and revise as needed
-7. **Merge**: Code merged after approval
+1. **이슈 생성**: 작업을 시작하기 전에 이슈 생성
+2. **브랜치 생성**: 기능 또는 버그 수정을 위한 브랜치 생성
+3. **코드 작성**: 코딩 표준을 준수하며 코드 작성
+4. **테스트**: 새 코드에 대한 테스트 작성
+5. **풀 리퀘스트**: 변경 사항 설명 및 검토 요청
+6. **코드 리뷰**: 피드백 수렴 및 필요시 수정
+7. **병합**: 승인 후 코드 병합
 
-## 9. Performance Optimization
+## 9. 성능 최적화
 
-### 9.1 Memory Usage Optimization
+### 9.1 메모리 사용 최적화
 
-#### 9.1.1 Structural Sharing
+#### 9.1.1 구조적 공유
 
-Axion uses structural sharing to optimize memory usage while maintaining immutability.
+Axion는 불변성을 유지하면서 메모리 사용을 최적화하기 위해 구조적 공유를 사용합니다.
 
 ```
-// State before change
+// 변경 전 상태
 {
   a: {
     b: { value: 1 },
@@ -1379,17 +1380,17 @@ Axion uses structural sharing to optimize memory usage while maintaining immutab
   }
 }
 
-// After changing a.b.value to 3
-// (gray nodes are shared with original object)
+// a.b.value를 3으로 변경 후
+// (회색 노드는 원래 객체와 공유)
 {
   a: {
-    b: { value: 3 },  // New object
-    c: { value: 2 }   // Shared with original
+    b: { value: 3 },  // 새 객체
+    c: { value: 2 }   // 원래 객체와 공유
   }
 }
 ```
 
-**Implementation**:
+**구현**:
 
 ```typescript
 function setValueAtPath<T extends object>(
@@ -1404,21 +1405,21 @@ function setValueAtPath<T extends object>(
   const result = structuralClone(obj);
   let current: any = result;
 
-  // Navigate to path up to last segment
+  // 마지막 세그먼트 전까지 경로 탐색
   for (let i = 0; i < path.length - 1; i++) {
     const segment = path[i];
 
     if (current[segment] === undefined) {
       current[segment] = typeof path[i + 1] === "number" ? [] : {};
     } else {
-      // Clone for structural sharing
+      // 구조적 공유를 위해 복제
       current[segment] = structuralClone(current[segment]);
     }
 
     current = current[segment];
   }
 
-  // Set value at last segment
+  // 마지막 세그먼트에 값 설정
   const lastSegment = path[path.length - 1];
   current[lastSegment] = structuralClone(value);
 
@@ -1426,41 +1427,41 @@ function setValueAtPath<T extends object>(
 }
 ```
 
-#### 9.1.2 Preventing Memory Leaks
+#### 9.1.2 메모리 누수 방지
 
-Strategies to prevent memory leaks in subscription and dependency management.
+구독 및 의존성 관리에서 메모리 누수를 방지하기 위한 전략입니다.
 
-**Using Weak References**:
+**약한 참조 사용**:
 
 ```typescript
-// Use WeakMap to allow garbage collection
+// 약한 맵을 사용하여 가비지 컬렉션 허용
 const derivedStates = new WeakMap<object, Set<Atom<any>>>();
 
-// Derived states can be garbage collected if atom is unused
+// 아톰이 사용되지 않으면 관련 파생 상태도 정리될 수 있음
 ```
 
-**Explicit Unsubscription**:
+**명시적 구독 해제**:
 
 ```typescript
-// All subscriptions return unsubscribe function
+// 모든 구독은 해제 함수 반환
 const unsubscribe = counter.subscribe(() => {
   console.log("State changed");
 });
 
-// Unsubscribe
+// 구독 해제
 unsubscribe();
 ```
 
-### 9.2 Computation Optimization
+### 9.2 계산 최적화
 
-#### 9.2.1 Minimal Recomputation
+#### 9.2.1 최소 재계산
 
-Axion performs only necessary computation through precise dependency tracking.
+Axion는 정밀한 의존성 추적을 통해 필요한 계산만 수행합니다.
 
-**Example**:
+**예시**:
 
 ```typescript
-// User state
+// 사용자 상태
 const user = axion({
   name: "John",
   profile: {
@@ -1469,89 +1470,89 @@ const user = axion({
   },
 });
 
-// Derived state 1 - depends only on name
+// 파생 상태 1 - 이름에만 의존
 const greeting = axion.derive(() => `Hello, ${user.get().name}!`);
 
-// Derived state 2 - depends only on age
+// 파생 상태 2 - 나이에만 의존
 const isAdult = axion.derive(() => user.get().profile.age >= 18);
 
-// Change only name - only greeting is recomputed
+// 이름만 변경 - greeting만 재계산됨
 user.at("name").set("Jane");
 
-// Change only age - only isAdult is recomputed
+// 나이만 변경 - isAdult만 재계산됨
 user.at("profile").at("age").set(25);
 ```
 
-#### 9.2.2 Path-Based Granularity
+#### 9.2.2 경로 기반 세분화
 
-Path-based access allows for more precise dependency tracking.
+경로 기반 접근으로 더 정밀한 의존성 추적이 가능합니다.
 
 ```typescript
-// Path-based access - more precise dependency tracking
+// 경로 기반 접근 - 더 정밀한 의존성 추적
 const userName = axion.derive(() => user.at("name").get());
 const userAge = axion.derive(() => user.at("profile").at("age").get());
 
-// Change profile email only - no derived states are recomputed
+// 프로필 이메일만 변경 - 어떤 파생 상태도 재계산하지 않음
 user.at("profile").at("email").set("jane@example.com");
 ```
 
-### 9.3 Rendering Optimization
+### 9.3 렌더링 최적화
 
-#### 9.3.1 Granular Subscriptions
+#### 9.3.1 세분화된 구독
 
-Granular subscription strategy for rendering optimization.
+렌더링 최적화를 위한 세분화된 구독 전략입니다.
 
-**React Example**:
+**React 예시**:
 
 ```tsx
-// State granularity
+// 상태 세분화
 const userState = axion({
   name: "John",
   profile: { age: 30 },
 });
 
-// UserNameDisplay - only reacts to name changes
+// UserNameDisplay - name 변경에만 반응
 function UserNameDisplay() {
   const name = useAxion(userState.at("name"));
   return <h2>{name}</h2>;
 }
 
-// UserAgeDisplay - only reacts to age changes
+// UserAgeDisplay - age 변경에만 반응
 function UserAgeDisplay() {
   const age = useAxion(userState.at("profile").at("age"));
   return <p>Age: {age}</p>;
 }
 
-// Name change only rerenders UserNameDisplay
-// Age change only rerenders UserAgeDisplay
+// 이름 변경 시 UserNameDisplay만 리렌더링됨
+// 나이 변경 시 UserAgeDisplay만 리렌더링됨
 ```
 
-#### 9.3.2 Batching Async Updates
+#### 9.3.2 비동기 업데이트 배치
 
-Process renders in batches to improve performance.
+렌더링을 배치로 처리하여 성능을 향상시킵니다.
 
-**Microtask-Based Batching**:
+**미크로태스크 기반 배치**:
 
 ```typescript
-// Batch processing system (internal implementation)
+// 배치 처리 시스템 (내부 구현)
 function scheduleBatchedEffect(effect: () => void): void {
   pendingEffects.add(effect);
 
   if (!isBatching()) {
-    // Schedule as microtask (runs in next event loop)
+    // 마이크로태스크로 예약 (다음 이벤트 루프에서 실행)
     queueMicrotask(runPendingEffects);
   }
 }
 ```
 
-### 9.4 Network Request Optimization
+### 9.4 네트워크 요청 최적화
 
-#### 9.4.1 Debouncing and Throttling
+#### 9.4.1 디바운싱과 스로틀링
 
 ```typescript
 import { axion } from "axion-state";
 
-// Debounce helper
+// 디바운싱 헬퍼
 function debounce<T extends (...args: any[]) => any>(
   fn: T,
   delay: number
@@ -1564,18 +1565,18 @@ function debounce<T extends (...args: any[]) => any>(
   };
 }
 
-// Usage
+// 사용 예시
 const searchState = axion({ query: "" });
 
-// Debounced search effect
+// 디바운스된 검색 효과
 axion.effect(() => {
   const query = searchState.get().query;
 
-  // Debounced API call
+  // 디바운스된 API 호출
   const performSearch = debounce((q: string) => {
     if (q.length > 2) {
       api.search(q).then((results) => {
-        // Process results
+        // 결과 처리
       });
     }
   }, 300);
@@ -1584,10 +1585,10 @@ axion.effect(() => {
 });
 ```
 
-#### 9.4.2 Request Caching and Deduplication
+#### 9.4.2 요청 캐싱 및 중복 제거
 
 ```typescript
-// Request caching helper
+// 요청 캐싱 헬퍼
 const requestCache = new Map<string, Promise<any>>();
 
 async function cachedFetch<T>(
@@ -1597,42 +1598,42 @@ async function cachedFetch<T>(
 ): Promise<T> {
   const cacheKey = `${url}:${JSON.stringify(options)}`;
 
-  // Check for ongoing request
+  // 진행 중인 요청 확인
   if (requestCache.has(cacheKey)) {
     return requestCache.get(cacheKey) as Promise<T>;
   }
 
-  // Start new request
+  // 새 요청 시작
   const promise = fetch(url, options)
     .then((res) => res.json())
     .finally(() => {
-      // Set cache expiration
+      // 캐시 만료 설정
       setTimeout(() => {
         requestCache.delete(cacheKey);
       }, cacheDuration);
     });
 
-  // Store in cache
+  // 캐시에 저장
   requestCache.set(cacheKey, promise);
 
   return promise as Promise<T>;
 }
 ```
 
-## 10. Examples and Patterns
+## 10. 예제 및 패턴
 
-### 10.1 Basic Patterns
+### 10.1 기본 패턴
 
-#### 10.1.1 Todo List
+#### 10.1.1 투두 리스트
 
 ```typescript
-// State definition
+// 상태 정의
 const todosState = axion({
   items: [] as Array<{ id: string; text: string; completed: boolean }>,
   filter: "all" as "all" | "active" | "completed",
 });
 
-// Derived state
+// 파생 상태
 const filteredTodos = axion.derive(() => {
   const { items, filter } = todosState.get();
 
@@ -1646,7 +1647,7 @@ const filteredTodos = axion.derive(() => {
   }
 });
 
-// Actions
+// 액션
 const actions = {
   addTodo(text: string) {
     todosState.update((state) => ({
@@ -1672,7 +1673,7 @@ const actions = {
   },
 };
 
-// React component
+// React 컴포넌트
 function TodoList() {
   const todos = useAxion(filteredTodos);
 
@@ -1693,10 +1694,10 @@ function TodoList() {
 }
 ```
 
-#### 10.1.2 User Profile
+#### 10.1.2 사용자 프로필
 
 ```typescript
-// State definition
+// 상태 정의
 const userProfile = axion({
   loading: false,
   error: null as string | null,
@@ -1708,17 +1709,17 @@ const userProfile = axion({
   } | null,
 });
 
-// Derived state
+// 파생 상태
 const isLoggedIn = axion.derive(() => !!userProfile.get().data);
 
-// Actions
+// 액션
 const userActions = {
   async fetchProfile(userId: string) {
-    // Start loading
+    // 로딩 시작
     userProfile.update((state) => ({ ...state, loading: true, error: null }));
 
     try {
-      // API call
+      // API 호출
       const response = await fetch(`/api/users/${userId}`);
 
       if (!response.ok) {
@@ -1727,14 +1728,14 @@ const userActions = {
 
       const data = await response.json();
 
-      // Update data on success
+      // 성공 시 데이터 업데이트
       userProfile.update((state) => ({
         ...state,
         loading: false,
         data,
       }));
     } catch (err) {
-      // Handle error
+      // 오류 처리
       userProfile.update((state) => ({
         ...state,
         loading: false,
@@ -1751,7 +1752,7 @@ const userActions = {
   },
 };
 
-// Effect - react to login state changes
+// 효과 - 로그인 상태 변화에 반응
 const cleanup = axion.effect(() => {
   const loggedIn = isLoggedIn.get();
 
@@ -1763,12 +1764,12 @@ const cleanup = axion.effect(() => {
 });
 ```
 
-### 10.2 Advanced Patterns
+### 10.2 고급 패턴
 
-#### 10.2.1 Finite State Machine
+#### 10.2.1 유한 상태 기계
 
 ```typescript
-// State machine definition
+// 상태 머신 정의
 type State = "idle" | "loading" | "success" | "error";
 type Event = "FETCH" | "RESOLVE" | "REJECT" | "RESET";
 
@@ -1778,16 +1779,16 @@ interface MachineState<T> {
   error: Error | null;
 }
 
-// State machine creation function
+// 상태 머신 생성 함수
 function createStateMachine<T>(initialData: T | null = null) {
-  // Initial state
+  // 초기 상태
   const state = axion<MachineState<T>>({
     state: "idle",
     data: initialData,
     error: null,
   });
 
-  // State transition implementation
+  // 상태 전이 구현
   function transition(event: Event, payload?: any) {
     axion.tx(() => {
       switch (event) {
@@ -1821,7 +1822,7 @@ function createStateMachine<T>(initialData: T | null = null) {
     });
   }
 
-  // Async action creator
+  // 비동기 액션 생성
   function createAsyncAction<R>(promiseFn: () => Promise<R>): () => Promise<R> {
     return async () => {
       transition("FETCH");
@@ -1845,7 +1846,7 @@ function createStateMachine<T>(initialData: T | null = null) {
   };
 }
 
-// Usage
+// 사용 예
 const userMachine = createStateMachine(null);
 
 const fetchUser = userMachine.createAsyncAction(async () => {
@@ -1853,7 +1854,7 @@ const fetchUser = userMachine.createAsyncAction(async () => {
   return response.json();
 });
 
-// React to state
+// 상태에 반응
 axion.effect(() => {
   const { state: currentState, data, error } = userMachine.state.get();
 
@@ -1872,16 +1873,16 @@ axion.effect(() => {
   }
 });
 
-// Fetch user
+// 사용자 불러오기
 fetchUser().catch(console.error);
 ```
 
-#### 10.2.2 Form State Management
+#### 10.2.2 폼 상태 관리
 
 ```typescript
-// Form state and validation
+// 폼 상태 및 유효성 검사
 function createForm<T extends Record<string, any>>(initialValues: T) {
-  // Form state
+  // 폼 상태
   const formState = axion({
     values: initialValues,
     touched: {} as Record<keyof T, boolean>,
@@ -1890,20 +1891,20 @@ function createForm<T extends Record<string, any>>(initialValues: T) {
     isValid: true
   });
 
-  // Per-field validation rules
-  const validators = new Map<
+  // 필드별 유효성 검사 규칙
+  const validators = new Map
     keyof T,
     (value: any, allValues: T) => string | null
   >();
 
-  // Register validation function
+  // 유효성 검사 함수 등록
   function setValidator<K extends keyof T>(
     field: K,
     validator: (value: T[K], allValues: T) => string | null
   ) {
     validators.set(field, validator);
 
-    // Run validation on current value
+    // 현재 값에 대해 유효성 검사 실행
     const currentValue = formState.get().values[field];
     const error = validator(currentValue, formState.get().values);
 
@@ -1917,32 +1918,32 @@ function createForm<T extends Record<string, any>>(initialValues: T) {
     }));
   }
 
-  // Value change handler
+  // 값 변경 핸들러
   function handleChange<K extends keyof T>(field: K, value: T[K]) {
     formState.update(state => {
-      // New values
+      // 새 값
       const newValues = {
         ...state.values,
         [field]: value
       };
 
-      // Validation
+      // 유효성 검사
       const validator = validators.get(field);
       const error = validator ? validator(value, newValues) : null;
 
-      // Mark field as touched
+      // 필드 터치 표시
       const touched = {
         ...state.touched,
         [field]: true
       };
 
-      // Update errors
+      // 오류 업데이트
       const errors = {
         ...state.errors,
         [field]: error
       };
 
-      // Check overall validity
+      // 전체 유효성 확인
       const isValid = Object.values(errors).every(e => !e);
 
       return {
@@ -1955,11 +1956,11 @@ function createForm<T extends Record<string, any>>(initialValues: T) {
     });
   }
 
-  // Submit handler
+  // 제출 핸들러
   async function handleSubmit(
     onSubmit: (values: T) => Promise<void> | void
   ) {
-    // Mark all fields as touched
+    // 모든 필드가 터치되었다고 표시
     const allTouched = Object.keys(formState.get().values).reduce(
       (acc, key) => ({ ...acc, [key]: true }),
       {} as Record<keyof T, boolean>
@@ -1971,7 +1972,7 @@ function createForm<T extends Record<string, any>>(initialValues: T) {
       isSubmitting: true
     }));
 
-    // Validation
+    // 유효성 검사
     if (!formState.get().isValid) {
       formState.at('isSubmitting').set(false);
       return;
@@ -1991,7 +1992,7 @@ function createForm<T extends Record<string, any>>(initialValues: T) {
     }
   }
 
-  // Form reset
+  // 폼 초기화
   function resetForm() {
     formState.set({
       values: initialValues,
@@ -2011,13 +2012,13 @@ function createForm<T extends Record<string, any>>(initialValues: T) {
   };
 }
 
-// Usage
+// 사용 예시
 const loginForm = createForm({
   email: '',
   password: ''
 });
 
-// Set validation rules
+// 유효성 검사 규칙 설정
 loginForm.setValidator('email', email => {
   if (!email) return 'Email is required';
   if (!/\S+@\S+\.\S+/.test(email)) return 'Invalid email format';
@@ -2030,7 +2031,7 @@ loginForm.setValidator('password', password => {
   return null;
 });
 
-// React component
+// React 컴포넌트
 function LoginForm() {
   const { values, errors, touched, isSubmitting } = useAxion(loginForm.formState);
 
@@ -2075,59 +2076,59 @@ function LoginForm() {
 }
 ```
 
-### 10.3 Anti-Patterns
+### 10.3 안티패턴
 
-#### 10.3.1 Cyclic Dependencies
+#### 10.3.1 순환 의존성
 
-**Wrong Pattern**:
+**잘못된 패턴**:
 
 ```typescript
-// Interdependent derived states
+// 상호 의존적인 파생 상태
 const a = axion({ value: 1 });
 const b = axion.derive(() => a.get().value * 2);
 
-// Creates cyclic dependency at creation time
+// 생성 시점에 순환 의존성 생성
 // a → b → a
 const c = axion.derive(() => {
   const valueB = b.get();
-  a.set({ value: valueB + 1 }); // Creates cyclic reference to a
+  a.set({ value: valueB + 1 }); // 여기서 a에 의존하는 순환 생성
   return valueB;
 });
 ```
 
-**Correct Pattern**:
+**올바른 패턴**:
 
 ```typescript
-// Maintain one-way dependencies
+// 단방향 의존성 유지
 const a = axion({ value: 1 });
 const b = axion.derive(() => a.get().value * 2);
 const c = axion.derive(() => b.get() + 1);
 
-// Separate into action
+// 액션으로 분리
 function updateAFromB() {
   const valueB = b.get();
   a.set({ value: valueB + 1 });
 }
 ```
 
-#### 10.3.2 Over-Granularity
+#### 10.3.2 과도한 세분화
 
-**Wrong Pattern**:
+**잘못된 패턴**:
 
 ```typescript
-// Overly granular state
+// 지나치게 세분화된 상태
 const firstName = axion({ value: "John" });
 const lastName = axion({ value: "Doe" });
 const age = axion({ value: 30 });
 const email = axion({ value: "john@example.com" });
 
-// These states often change together
+// 이런 상태들은 함께 변경되는 경우가 많음
 ```
 
-**Correct Pattern**:
+**올바른 패턴**:
 
 ```typescript
-// Cohesive state grouping
+// 응집력 있는 상태 그룹화
 const user = axion({
   firstName: "John",
   lastName: "Doe",
@@ -2135,19 +2136,19 @@ const user = axion({
   email: "john@example.com",
 });
 
-// Lens access if needed
+// 필요한 경우 렌즈로 분리 접근
 const firstName = user.at("firstName");
 ```
 
-#### 10.3.3 Async Work Inside State Updates
+#### 10.3.3 상태 변경 내 비동기 작업
 
-**Wrong Pattern**:
+**잘못된 패턴**:
 
 ```typescript
-// Async work directly in state update
+// 상태 업데이트 내부에서 직접 비동기 작업
 function fetchAndUpdateUser() {
   users.update(async (state) => {
-    // Async work inside state update - wrong approach!
+    // 상태 업데이트 내에서 비동기 작업 수행 - 잘못된 방식!
     const response = await fetch("/api/user");
     const data = await response.json();
     return { ...state, user: data };
@@ -2155,10 +2156,10 @@ function fetchAndUpdateUser() {
 }
 ```
 
-**Correct Pattern**:
+**올바른 패턴**:
 
 ```typescript
-// Separate async work
+// 비동기 작업 분리
 async function fetchAndUpdateUser() {
   try {
     users.at("loading").set(true);
@@ -2182,17 +2183,17 @@ async function fetchAndUpdateUser() {
 }
 ```
 
-#### 10.3.4 Side Effects in Derived State
+#### 10.3.4 파생 상태에서의 부작용
 
-**Wrong Pattern**:
+**잘못된 패턴**:
 
 ```typescript
-// Side effects inside derived state
+// 파생 상태 내에서 부작용 발생
 const notifications = axion.derive(() => {
   const count = unreadMessages.get().length;
 
   if (count > 0) {
-    // Side effect in derived computation - wrong approach!
+    // 파생 계산 내에서 부작용 - 잘못된 방식!
     document.title = `(${count}) New Messages`;
     playNotificationSound();
   }
@@ -2201,13 +2202,13 @@ const notifications = axion.derive(() => {
 });
 ```
 
-**Correct Pattern**:
+**올바른 패턴**:
 
 ```typescript
-// Keep derived state pure
+// 파생 상태는 순수하게 유지
 const unreadCount = axion.derive(() => unreadMessages.get().length);
 
-// Separate side effects into effects
+// 부작용은 효과로 분리
 axion.effect(() => {
   const count = unreadCount.get();
 
