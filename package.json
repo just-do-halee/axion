@@ -1,0 +1,147 @@
+{
+  "name": "axion-state",
+  "version": "0.5.0",
+  "description": "A modern state management library built on mathematically proven principles, designed to simplify complex state management with predictability and performance.",
+  "license": "(Apache-2.0 OR MIT)",
+  "author": {
+    "name": "just-do-halee",
+    "email": "just.do.halee@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/just-do-halee/axion"
+  },
+  "homepage": "https://github.com/just-do-halee/axion#readme",
+  "bugs": {
+    "url": "https://github.com/just-do-halee/axion/issues"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/just-do-halee"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "react": [
+        "./dist/react.d.ts"
+      ],
+      "vue": [
+        "./dist/vue.d.ts"
+      ]
+    }
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js",
+      "require": "./dist/react.cjs"
+    },
+    "./vue": {
+      "types": "./dist/vue.d.ts",
+      "import": "./dist/vue.js",
+      "require": "./dist/vue.cjs"
+    },
+    "./core/*": {
+      "types": "./dist/core/*.d.ts",
+      "import": "./dist/core/*.js",
+      "require": "./dist/core/*.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "LICENSE-MIT",
+    "LICENSE-APACHE",
+    "README.md"
+  ],
+  "keywords": [
+    "state",
+    "management",
+    "reactive",
+    "immutable",
+    "performance",
+    "typescript",
+    "react",
+    "vue",
+    "atom",
+    "path",
+    "derive",
+    "transaction",
+    "bun"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && rollup -c rollup.config.mjs && tsc --emitDeclarationOnly && npm run copy-dts",
+    "build:bun": "bun run clean && rollup -c rollup.config.mjs && tsc --emitDeclarationOnly && bun run copy-dts",
+    "copy-dts": "cp dist/dts/src/index.d.ts dist/ && cp dist/dts/src/react.d.ts dist/ && cp dist/dts/src/vue.d.ts dist/ && mkdir -p dist/core && cp -r dist/dts/src/core/*.d.ts dist/core/ && mkdir -p dist/utils && cp -r dist/dts/src/utils/*.d.ts dist/utils/ && mkdir -p dist/time && cp -r dist/dts/src/time/*.d.ts dist/time/ && mkdir -p dist/internals && cp -r dist/dts/src/internals/*.d.ts dist/internals/",
+    "dev": "rollup -c rollup.config.mjs -w",
+    "test": "jest",
+    "test:bun": "bun test",
+    "test:watch": "jest --watch",
+    "typecheck": "tsc --noEmit",
+    "typecheck:examples": "tsc --noEmit examples/task-manager/app.ts",
+    "test:coverage": "jest --coverage",
+    "test:performance": "cross-env TEST_ENV=performance jest --testMatch=\"**/__tests__/performance/**/*.test.ts\"",
+    "lint": "eslint src --ext .ts,.tsx",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "prepublishOnly": "npm run lint && npm run typecheck && npm run build && npm run test",
+    "pub": "npm publish",
+    "pub:bun": "bun run lint && bun run typecheck && bun run build && bun publish"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "vue": ">=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-replace": "^6.0.2",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^14.0.0",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^18.16.0",
+    "@types/react": "^18.2.0",
+    "@types/testing-library__jest-dom": "^5.14.5",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.39.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "jest-serializer-html": "^7.1.0",
+    "prettier": "^2.8.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "^5.0.5",
+    "rollup": "^4.12.0",
+    "rollup-plugin-dts": "^6.1.0",
+    "ts-jest": "^29.2.6",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.4",
+    "vue": "^3.2.47"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
